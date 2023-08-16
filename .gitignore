@@ -1,2 +1,8 @@
 # Project exclude paths
 /cmake-build-debug/
+
+# 환경설정 파일
+*.env
+
+# jetbrain
+.idea
