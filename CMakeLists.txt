@@ -8,4 +8,6 @@ add_executable(C___ex main.cpp day01/FirstStep.cpp day02/scope1.cpp day02/scope2
         day03/structEx.cpp
         day03/classEx.cpp
         day03/arrayEx.cpp
-        day03/simplePt.cpp)
+        day03/simplePt.cpp
+        day04/funcEx.cpp
+        day04/convFtoC.cpp)
