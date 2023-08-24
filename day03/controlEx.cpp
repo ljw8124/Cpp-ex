@@ -29,6 +29,7 @@ char switchEx(int score) {
             grade = 'C';
             break;
         default:
+            grade = 'D';
 
     }
     return grade;

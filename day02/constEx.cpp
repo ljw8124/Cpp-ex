@@ -3,10 +3,11 @@
 //
 
 #include <iostream>
+using namespace std;
 
 int a;
-std:: cin >> a;
-
+//cin >> a;
+/*
 const int b = 20;
 const int C1 = a;           // cin 을 통해 입력된 a 의 값으로 초기화
 
@@ -22,3 +23,4 @@ void f(int x) {
     constexpr int a = fac(4);       // 컴파일할 때 미리 계산
     int b = fac(x);                 // 실행 중 계산
 }
+ */
