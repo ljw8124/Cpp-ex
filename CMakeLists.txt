@@ -13,4 +13,5 @@ add_executable(C___ex main.cpp day01/FirstStep.cpp day02/scope1.cpp day02/scope2
         day04/convFtoC.cpp
         day04/SwapInt.cpp
         day04/Round.cpp
-        day04/TimeCalc.cpp)
+        day04/TimeCalc.cpp
+        day05/Counter.h)
