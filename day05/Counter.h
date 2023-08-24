@@ -18,11 +18,11 @@ public:
 
     // 값 증가(+1)
     void count() {
-        value++;
+        ++value;
     }
 
     // 현재 값 반환
-    int getValue() {
+    int getValue() const {      // const 사용은 데이터 멤버의 값을 수정하지 않는 멤버함수를 의미힌다.
         return value;
     }
 };
