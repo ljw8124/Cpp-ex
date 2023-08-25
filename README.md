@@ -634,7 +634,34 @@ public:
 
 
 ## 이동 생성자
+- 자원을 이동시키는 것, 불필요한 복사의 비효율성을 개선하기 위해서 사용
+- rvalue 참조로 전달된 같은 클래스의 객체의 내용을 이동하여 객체를 만드는 생성자
+- 선언 형식
+```
+class ClassName {
+public:
+    // const 로 선언하지 않아도 원본 훼손 x
+    className(ClassName&& obj) {
+        ...
+    }
+}
+```
 
+### rValue 참조
+전통적 의미의 lvalue 와 rvalue => 할당되는 값 lvalue, 할당(전달)하는 값 rvalue
+
+- '&' 기호로 선언하는 lvalue 와 달리 rvalue 참조는 '&&' 기호로 선언한다.
+- lvalue 참조와 rvalue 참조의 사용 예
+```
+VecF v1(3), v2(3);
+
+VecF& vLRef = v1;             // lvalue 참조로 lvalue 를 참조함
+int& a = 10;                  // 오류: lvalue 참조로 rvalue 를 참조할 수 없음
+const int& b= 20;             // 상수 lvalue 참조로는 rvalue 를 참조를 할 수 있음
+int&& c = 30;                 // rvalue 는 rvalue 참조로 참조할 수 있음
+VecF&& vRRef1 = v1.add(v2);   // 함수의 반환 객체는 rvalue 임
+VecF&& vRRef2 = v2;           // 오류: rvalue 참조로 lvalue 를 참조할 수 없음
+```
 
 
 ### static 데이터 멤버와 static 멤버함수

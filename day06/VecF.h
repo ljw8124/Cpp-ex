@@ -19,9 +19,7 @@ public:
         if(a) memcpy(arr, a, sizeof(float) * n);
     }
 
-    ~VecF() {
-        delete[] arr;
-    }
+
 
     VecF add(const VecF& fv) const {
         VecF tmp(n);
@@ -43,6 +41,17 @@ public:
      VecF(const VecF& fv) : n{fv.n} {
         arr = new float[n];
         memcpy(arr, fv.arr, sizeof(float)*n);
+    }
+
+    // 이동 생성자 형성
+    VecF(VecF&& fv) : n{fv.n}, arr{fv.arr} {
+        fv.arr = nullptr;       // delete 할 때 아무이상 없기 위해서 비워야함
+        fv.n = 0;               // 데이터가 없다는 것을 의미하게 만듦
+    }
+
+
+    ~VecF() {
+        delete[] arr;
     }
 };
 
