@@ -16,4 +16,6 @@ add_executable(C___ex main.cpp day01/FirstStep.cpp day02/scope1.cpp day02/scope2
         day04/TimeCalc.cpp
         day05/Counter.h
         day05/CntMain.cpp
-        day06/CounterM.h)
+        day06/CounterM.h
+        day06/mainFunc.cpp
+        day06/VecF.h)

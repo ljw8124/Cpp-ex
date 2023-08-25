@@ -18,6 +18,10 @@ public:
     void count() {
         value = value < maxValue ? value + 1 : 0;
     }
+    CounterM(const CounterM& c)
+    : maxValue{c.maxValue}, value{c.value} {
+
+    }
 };
 
 // 위 클래스는 생성자를 만들었으므로, 생성자의 매개변수에 맞게 선언해주어야 한다
