@@ -22,4 +22,6 @@ add_executable(C___ex main.cpp day01/FirstStep.cpp day02/scope1.cpp day02/scope2
         day06/NameObj.h
         day07/CharStack.h
         day07/CharStack.cpp
-        day07/CSMain.cpp)
+        day07/CSMain.cpp
+        day07/Complex1.h
+        day07/Complex1.cpp)
