@@ -28,5 +28,5 @@ void Complex1::display() const
         cout << "+j" << iPart;
     else if(iPart < 0)
         cout << '-j' << -iPart;
-    cout << ")"
+    cout << ")";
 }
