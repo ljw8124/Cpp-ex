@@ -24,4 +24,7 @@ add_executable(C___ex main.cpp day01/FirstStep.cpp day02/scope1.cpp day02/scope2
         day07/CharStack.cpp
         day07/CSMain.cpp
         day07/Complex1.h
-        day07/Complex1.cpp)
+        day07/Complex1.cpp
+        day08/operatorEx.h
+        day08/Pencils.h
+        day08/Pencils.cpp)
