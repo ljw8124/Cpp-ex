@@ -783,3 +783,51 @@ ReturnClass className::operator opSymbol(ArgClass arg) { ... }
 
 ## 스트림 출력 연산자의 자둥 정의
 - 클래스에 소속되지 않은 연산자는 friend 로 선언하여 출력
+
+
+
+## 대입 이동연산자
+
+### 대입 연산자의 다중정의
+- 대입연산자(=)
+  - 묵시적인 대입 연산자: 우측 피연산자 데이터 멤버를 좌측 피연산자에 그대로 복사
+  - 객체에 동적 할당된 메모리를 가르키는 포인터가 포함되어 있을 경우 얕은 복사로 인해 의도하지 않은 공유 상태의 문제가 발생할 수 있음 => 깊은 복사를 할수 있는 대입 연산자를 다중정의할 필요가 있음
+
+```
+VecF& VecF::operator=(const VecF& fv) {
+  if(n != fv.n) {
+    delete[] arr;
+    arr = new float[n = fv.n]
+  }
+  memcpy(arr, fv.arr, sizeof(float)*n);
+  return *this;
+}
+```
+
+- 이동 대입 연산자(=)
+  - 좌측 피연산자에 대입할 우측 피연산자가 rvalue 일 때 사용됨 -> 대입 후 우측 피연산자의 내용이 더 이상 필요 없을 때
+  - 우측 피연산자의 내용을 좌측 피연산자로 이동하여 불필요한 복사를 하지 않아도 되어 효율적
+```
+VecF& VecF::operator(VecF&& fv) { // 상수 x
+  delete[] arr;
+  n = fv.n;
+  arr = fv.arr;
+  fv.arr = nullptr;
+  return *this;
+}
+```
+
+- std:move 함수 활용
+  - 인수로 전달되는 객체의 rvalue 참조를 반환
+  - ex) VecF tmpe = std::move(v1);
+
+
+### 첨자 연산자 다중 정의
+
+- [] 연산자
+  - 배열의 첨자를 지정하는 이항연산자
+  - 피연산자: 배열과 첨자
+- 데이터를 저장하기 위해 사용할 [] 연산자
+- cosnt 객체를 위한 [] 연산자
+  - 데이터를 읽기만 할 수 있도록 [] 연산자를 정의함
+  - 
