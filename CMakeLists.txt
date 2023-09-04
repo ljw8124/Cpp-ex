@@ -34,4 +34,5 @@ add_executable(C___ex main.cpp day01/FirstStep.cpp day02/scope1.cpp day02/scope2
         day09/homework04.cpp
         day09/homework05.cpp
         day10/VFMain3.cpp
-        day10/SafeIntArray.h)
+        day10/SafeIntArray.h
+        day10/MyString.h)
