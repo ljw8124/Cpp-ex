@@ -39,4 +39,6 @@ add_executable(C___ex main.cpp day01/FirstStep.cpp day02/scope1.cpp day02/scope2
         day11/Person1.h
         day11/Student1.h
         day11/Person2.h
-        day11/student2.h)
+        day11/student2.h
+        day12/BaseClass.h
+        day12/DrvClass.h)
