@@ -52,4 +52,9 @@ add_executable(C___ex main.cpp day01/FirstStep.cpp day02/scope1.cpp day02/scope2
         day13/MIStudent.h
         day13/MIEmployee.h
         day13/MIParttime.h
-        day13/MiParttime.cpp)
+        day13/MiParttime.cpp
+        day13/VBPerson.h
+        day13/VBStudent.h
+        day13/VBEmployee.h
+        day13/VBParttime.h
+        day13/VBMain.cpp)

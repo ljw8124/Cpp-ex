@@ -1013,3 +1013,6 @@ virtual RetType functionName(fParameterList) = 0;
 ```
 Chulsoo.Student::print();
 ```
+### 다중 상속에서 공통 기초 클래스의 중복 상속
+다중 상속의 결과 1개의 기초 클래스가 여러 번 상속됨</br>
+가상 기초 클래스로 상속하여 중복 상속을 방지할 수 있음
