@@ -48,4 +48,8 @@ add_executable(C___ex main.cpp day01/FirstStep.cpp day02/scope1.cpp day02/scope2
         day13/Circle.cpp
         day13/Triangle.cpp
         day13/Triangle.h
-        day13/FigMain.cpp)
+        day13/FigMain.cpp
+        day13/MIStudent.h
+        day13/MIEmployee.h
+        day13/MIParttime.h
+        day13/MiParttime.cpp)
