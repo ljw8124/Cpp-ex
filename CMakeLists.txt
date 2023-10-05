@@ -62,4 +62,6 @@ add_executable(C___ex main.cpp day01/FirstStep.cpp day02/scope1.cpp day02/scope2
         day14/StackT.h
         day14/StackMain.cpp
         day14/SwapFunc.h
-        day14/SortFT.h)
+        day14/SortFT.h
+        day15/Vector1.cpp
+        day15/Vector2.h)
