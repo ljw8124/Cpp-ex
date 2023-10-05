@@ -1182,6 +1182,7 @@ n: 백터에 저장할 객체의 수
   - 함수의 실행에 따라 size() 의 값은 증가하거나 감소함
   - capacity() 의 값은 데이터 추가로 인해 확보된 메모리가 부족하여 확장될 때 바뀜
 
+### 반복자 활용 
 - vector 와 반복자 선언
 ```
 vector<ClassName>::iterator it;
@@ -1190,3 +1191,64 @@ vector<ClassName>::iterator it;
 - 반복자의 값을 구하는 vector 의 멤버함수
   - begin(): 첫 번째 원소를 가리키는 랜덤 엑세스 반복자를 반환함
   - end(): 마지막 원소의 다음 위치를 가리키는 랜덤 엑세스 반복자를 반환함
+
+### 알고리즘 활용
+- sort() 함수
+  - 랜덤 엑세스 반복자에 의해 지정된 범위의 값들을 정렬함
+  ```
+  sort(first, last)
+  sort(first, last, comp)
+  
+  first: 정렬할 범위의 시작 원소에 대한 포인터
+  last: 정렬할 범위의 마지막 원소의 다음 위치에 대한 포인터
+  comp: 정렬 순서를 정하는 함수(Callback 함수)
+  ```
+  
+- merge() 함수
+  - 동일한 기준으로 정렬된 두 개의 데이터 집합을 동일한 기준으로 정렬된 하나의 데이터 집합으로 결합하는 함수
+  ```
+  merge(first1, last1, first2, last2, dest);
+  merge(first1, last1, first2, last2, dest, comp);
+  
+  first1, last1: 첫 번째 정렬된 데이터의 범위
+  first2, last2: 두 번째 정렬된 데이터의 범위
+  dest: 합병 결과가 저장될 시작 위치
+  comp: 합병 순서를 정하는 함수
+  ```
+  
+- 정렬 순서 지정을 위한 콜백함수 전달
+```
+// 오름차순, 내림차순 구분 함수
+template<typename T>
+bool gt(const T& a, const T& b) {
+  return a > b;
+}
+
+void f(vector<int>& iv) {
+  // 내림차순 정렬
+  sort(iv.begin(), iv.end(), gt<int>);
+  ...
+}
+```
+
+- 함수객체를 이용한 콜백함수 전달
+  - 함수객체: 함수처럼 사용될 수 있는 객체
+    - ()연산자를 다중정의함
+    ```
+    template<typename T> class GREATER {
+    public:
+      bool operator()(const T& a, const T& b) const {
+        return a > b;
+      }
+    }
+    
+    // 객체 생성
+    GREATER<int> greaterThan;
+    if(greaterThan(20, 10)) {
+      cout << "20은 10보다 큼";
+    }
+    
+    void f(vector<int>& iv) {
+      sort(iv.begin(), iv.end(), GREATER<int>());
+    }
+    ```

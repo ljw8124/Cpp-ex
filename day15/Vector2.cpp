@@ -2,9 +2,6 @@
 // Created by 이정우 on 10/5/23.
 //
 
-#ifndef C___EX_VECTOR2_H
-#define C___EX_VECTOR2_H
-
 #include <iostream>
 #include <vector>
 using namespace std;
@@ -32,5 +29,3 @@ int vectorFunc()
     return 0;
 
 }
-
-#endif //C___EX_VECTOR2_H
