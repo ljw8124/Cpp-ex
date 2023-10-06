@@ -1289,3 +1289,152 @@ Traits: map 내에서의 상대적 순서를 결정하는 함수 객체의 클�
   - 삭제할 데이터를 가리키는 반복자를 지정하는 방법 ex. addrbook.erase(it1); <- it 가 가리키는 데이터 삭제
   - 삭제할 데이터를 가리키는 반복자의 범위를 지정하는 방법 ex. addrbook.erase(it1, it2) <- it1 ~ it2의 바로 앞 범위의 데이터 삭제
   - 키를 지정하여 데이터를 삭제하는 방법 ex. addrbook.erase('박영식');
+
+## 예외처리
+
+### 예외
+- 프로그램 실행 도중에 발생할 수 있는 비정상적인 사건(비정상적인 데이터, 자원의 부족 )
+- 예외 상황에 대한 적절한 대비를 하지 않으면 프로그램이 안정적으로 실행되지 않는 문제가 일어날 수 있음
+
+### 예외처리
+프로그램 실행 중 예외가 발생하였을 때를 대비하여 마련해 놓은 처리 절차에 따라 대응하는 것
+
+### 예시
+```
+double hmean(double a, double b)
+{
+  return 2.0 * a * b / (a + b);  // a+b 가 0 인 경우 예외 발생
+}
+
+// if 문을 사용하여 예외처리
+double hmean(double a, double b)
+{
+  if(a == -b) {
+    cout << "나누기를 할 수 없습니다." << endl;
+    exit(EXIT_FAILURE);
+  }
+  return 2.0 * a * b / (a + b);  // a+b 가 0 인 경우 예외 발생
+}
+
+// 프로그램이 요청하는 자원을 할당할 수 없는 경우
+void f() {
+  int *p  = new(nothrow) int[10000000];
+  ...       // 할당된 메모리의 활용
+}
+
+// 메모리 할당이 실패한 경우 nullptr 을 반환하므로 예외처리 필요
+void f() {
+  int *p  = new(nothrow) int[10000000];
+  if(!p) {
+    cerr << "메모리 할당 오류" << endl;
+    exit(EXIT_FAILURE);
+  }
+  ...       // 할당된 메모리의 활용
+}
+```
+
+## C++ 언어의 예외처리 체계
+
+### 예외처리
+
+- try ~ catch, throw 문장으로 구성
+```
+// try ~ catch 예시
+RetType1 someFunction() {
+  try {
+    // 예외가 발생할 수 있는 부분
+    someDangerousFunction();
+  }
+  catch(eClass e) {
+    // 발생한 예외를 처리하는 부분
+    exceptionProcRtn();
+  }
+  ... // 나머지 코드
+}
+
+// throw 예시
+RetType2 someDangerousFunction() {
+  if(/*예외검출조건*/) {
+    throw eObj;   // 예외 발생시 처리
+  }
+  else {
+    ...           // 정상적인 처리
+  }
+}
+```
+
+- 하나의 try 블록에 여러 개의 catch 블록 사용
+```
+// throw 된 예외 객체의 자료형에 맞는 매개변수가 선언된 catch 블록 에서 예외를 처리함
+try {
+  ...
+}
+catch(eClass1 e) {
+  ...   // 예외처리 블록1
+}
+catch(eClass2 e) {
+  ...   // 예외처리 블록2
+}
+catch(...) {
+  ...   // 그 외의 모든 예외 처리
+}
+```
+
+- 발생된 예외를 처리하기 위한 catch 블록으로 함수 호출 스택을 따라 이동
+
+### 예외처리에 따른 자원 관리 문제
+  - 자원 소실이 가능한 상황
+  ```
+  void f()
+  {
+    int *p = new int[1000];
+    for(int i = 0; i < 1000; i++) {
+      p[i] = i;
+      ...
+    }
+    if(ex_condition) {
+      throw "exception";  
+    }
+    delete[] p;
+  }
+  
+  // 예외를 처리할 catch 블록으로 복귀할 때 f() 가 호출될 때 까지
+  // 거쳐온 함수들의 지역변수들은 정상적인 소멸 과정을 거침
+  // 하지만 동적으로 할당된 메모리는 사라지지않고 쌓인다 -> 처리 필요 -> 스마트 포인터 활용
+  ```
+  
+### 스마트 포인터 활용
+- unique_ptr: 할당된 메모리를 한 개의 포인터만 가리킬 수 있음
+  - 다른 unique_ptr 에 대입할 수 없으며, 이동 대입만 가능함
+  - unique_ptr 가 제거되거나 nullptr 를 대입하면 가리키고 있던 메모리를 반납함
+- shared_ptr: 할당된 메모리를 여러 개의 포인터로 가리킬 수 있음
+  - 다른 shared_ptr 에 대입 및 이동 대입 가능
+  - 포인터가 제거되거나 nullptr 을 대입하는 등의 처리로 그 메모리를 가리키는 shared_ptr이 더 이상 없으면 메모리를 반납함
+- 스마트 포인터의 활용 예
+```
+#include <iostream>
+#include <memory>   // 스마트 포인터 사용시에 인크루트 필요
+using namespace std;
+
+int main() {
+  unique_ptr<int> p1{new int};
+  unipue_ptr<int> p2;
+  
+  *p1 = 10;
+  cout << *p1 << endl;
+  
+  p2 = move(p1);    // p2 = p1 은 불가능함!!!
+  cout < *p2 << endl;
+  
+  p2 = nullptr;     // 가리키고 있던 메모리는 해제됨
+  
+  return 0;
+}
+```
+- vector 를 활용하여서도 예외처리 활용이 가능하다
+
+### noexcept 지정자
+- noexcept 함수 지정
+  - 함수가 예외를 일으키지 않음을 지정
+
+

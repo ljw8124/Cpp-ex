@@ -24,7 +24,7 @@ int pbookFunc()
     pBook["김철수"] = "010-1234-5678";
 
     pBook.insert(make_pair("최승호", "010-6666-7777"));
-    pBook.insert({"박영철", "010-8888-9999"});         // 키값이 중복되어 insert 되지 않음 -> 무시
+    pBook.insert({"박영철", "010-8888-9999"});         // 키값이 중복되어 insert 되지 않음 -> 무우
 
     for(auto pb = pBook.begin(); pb != pBook.end(); ++pb) {
         cout << pb -> first << "   " << pb -> second << endl;

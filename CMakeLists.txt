@@ -66,4 +66,5 @@ add_executable(C___ex main.cpp day01/FirstStep.cpp day02/scope1.cpp day02/scope2
         day15/Vector1.cpp
         day15/Vector2.cpp
         day15/Vector3.cpp
-        day15/PBookMap.cpp)
+        day15/PBookMap.cpp
+        day16/HMean.cpp)
